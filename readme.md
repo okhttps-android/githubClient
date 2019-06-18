@@ -16,4 +16,8 @@ npm install --save-dev redux-logger
 
 ````
 ````
-4.
+4.安装redux-logger
+
+````
+npm i --save redux-logger
+````

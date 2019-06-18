@@ -1,5 +1,7 @@
 import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
-import AppContainer from "./app/component/navigator/HomeScreen"
+import AppContainer from "./app/index"
+
+
 
 AppRegistry.registerComponent(appName, () => AppContainer);

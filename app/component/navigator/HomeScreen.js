@@ -1,14 +1,25 @@
 import React from "react";
-import { View, Text ,Button} from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import {DetailsScreen} from "./DetailsScreen";
+import {connect} from 'react-redux'
+import {View, Text, Button,TouchableHighlight,StyleSheet} from "react-native";
+import {changeBtnText} from "../../action/actions";
+import http from "../../network/http.js"
+
 
 class HomeScreen extends React.Component {
+
+    loadData=()=>{
+        console.log("loadData()");
+        http.get("https://www.yundashi168.com/wxService/requestGet.json").then(res=>{
+            console.log("res.data=",res);
+        }).catch(err=>{
+            console.log("res.data=",err);
+        })
+    }
 
     render() {
         const {navigation} = this.props;
         return (
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
                 <Text style={{marginBottom: 10}}>Home Screen</Text>
                 <Button
                     title="详情页"
@@ -17,29 +28,60 @@ class HomeScreen extends React.Component {
                     }}
                 />
 
+                <Text style={{marginBottom: 10}}>{this.props.btnText}</Text>
+                <Button title="更新文字"
+                        onPress={() => {
+                             this.props.changeText("我的第一个ReactNative项目!");
+                        }}/>
+
+                <Button style={{marginBottom: 10}}
+                        title="断点调式" onPress={()=>{
+                    for (let i = 0; i < 10; i++) {
+                            console.log("i*i=",i*i);
+                    }
+                }}/>
+
+                <TouchableHighlight
+                    underlayColor="#1FB579"
+                    activeOpacity={0.5}
+                    style={styles.button} onPress={this.loadData.bind(this)}>
+                    <Text> Touch Here </Text>
+                </TouchableHighlight>
+
             </View>
         );
     }
 }
 
-export const AppNavigator = createStackNavigator({
-    Home: {
-        screen: HomeScreen,
-        navigationOptions: {//在这里定义每个页面的导航属性，静态配置
-            title: "首页",
-            headerBackTitle:'返回主界面',//设置返回此页面的返回按钮文案，有长度限制
-        }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 10
     },
-    Details:{
-        screen:DetailsScreen,
-        navigationOptions : {
-            title: '详情',
-            headerBackTitle:'返回',//设置返回此页面的返回按钮文案，有长度限制
-        }
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#DDDDDD',
+        padding: 10,
+        margin:10
+    },
+    countContainer: {
+        alignItems: 'center',
+        padding: 10
+    },
+    countText: {
+        color: '#FF00FF'
     }
-}, {
-    initialRouteName: 'Home',
-});
+})
 
+const mapStateToProps = state => ({
+    btnText:state.pageMainReducer.btnText
+})
 
- export default createAppContainer(AppNavigator);
+const mapDispatchToProps = dispatch => ({
+    changeText:(text)=>{
+        dispatch(changeBtnText(text));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
