@@ -8,7 +8,7 @@ class Http {
                 },
                 method: 'GET'
             })
-                .then(res => res)
+                .then(res => res.json)
                 .then(data => resolve(data))
                 .catch(err => reject(err))
 
@@ -21,7 +21,8 @@ class Http {
             fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=utf-8'
                 },
                 body: JSON.stringify(data)
             })

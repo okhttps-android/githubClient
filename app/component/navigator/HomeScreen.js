@@ -9,7 +9,7 @@ class HomeScreen extends React.Component {
 
     loadData=()=>{
         console.log("loadData()");
-        http.get("https://www.yundashi168.com/wxService/requestGet.json").then(res=>{
+        http.post("https://www.yundashi168.com/wxService/requestGet.json").then(res=>{
             console.log("res.data=",res);
         }).catch(err=>{
             console.log("res.data=",err);
