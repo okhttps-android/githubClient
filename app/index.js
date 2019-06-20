@@ -6,7 +6,6 @@ import logger from 'redux-logger'
 import reducer from './reducer/index'
 import AppContainer from "./component/index"
 let store = createStore(reducer, applyMiddleware(thunk,logger));
-GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
 
 
 export default class extends React.Component {

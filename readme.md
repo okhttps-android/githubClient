@@ -21,3 +21,15 @@ npm install --save-dev redux-logger
 ````
 npm i --save redux-logger
 ````
+
+5.安装axios
+
+````
+npm install axios
+````
+
+6.安装fetch
+
+````
+npm install whatwg-fetch --save
+````

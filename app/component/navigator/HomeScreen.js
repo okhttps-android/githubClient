@@ -3,17 +3,28 @@ import {connect} from 'react-redux'
 import {View, Text, Button,TouchableHighlight,StyleSheet} from "react-native";
 import {changeBtnText} from "../../action/actions";
 import http from "../../network/http.js"
-
+import {sendPost,sendGet} from "../../axios/axiosUtils"
+import {API} from "../../axios/api.config";
 
 class HomeScreen extends React.Component {
 
     loadData=()=>{
-        console.log("loadData()");
-        http.post("https://www.yundashi168.com/wxService/requestGet.json").then(res=>{
+        //fetch请求
+        console.log("loadData():",API.TEST_GET);
+        http.get(API.TEST_GET).then(res=>{
             console.log("res.data=",res);
         }).catch(err=>{
             console.log("res.data=",err);
         })
+        //axios请求
+        // console.log("loadData():",API.TEST_GET);
+        // sendGet({url:API.TEST_GET,params:{
+        //     name:'arison'
+        // }}).then(res=>{
+        //     console.log("res.data=",res);
+        // }).catch(err=>{
+        //     console.log("res.data=",err);
+        // })
     }
 
     render() {
@@ -42,10 +53,10 @@ class HomeScreen extends React.Component {
                 }}/>
 
                 <TouchableHighlight
-                    underlayColor="#1FB579"
-                    activeOpacity={0.5}
+                    underlayColor="#3391FF"
+                    activeOpacity={1}
                     style={styles.button} onPress={this.loadData.bind(this)}>
-                    <Text> Touch Here </Text>
+                    <Text style={styles.text} > Touch Here </Text>
                 </TouchableHighlight>
 
             </View>
@@ -62,6 +73,7 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
+        borderRadius:5,
         padding: 10,
         margin:10
     },
@@ -71,6 +83,10 @@ const styles = StyleSheet.create({
     },
     countText: {
         color: '#FF00FF'
+    },
+    text:{
+        fontWeight:'600',
+        color:'#ffffff'
     }
 })
 

@@ -1,14 +1,16 @@
+
+import api from "../axios/interApi";
+
 class Http {
     get(url) {
         return new Promise((resolve, reject) => {
             fetch(url,{
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 method: 'GET'
             })
-                .then(res => res.json)
+                .then(res => res)
                 .then(data => resolve(data))
                 .catch(err => reject(err))
 
@@ -18,18 +20,13 @@ class Http {
     // post方式
     post(url, data) {
         return new Promise((resolve, reject) => {
-            fetch(url, {
+            fetch(url,{
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=utf-8'
+                    'Content-type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            })
-                .then(res => res.json())
-                .then(data => resolve(data))
-                .catch(err => reject(err))
-
+            }).then(res=>res.data);
         })
     }
 
