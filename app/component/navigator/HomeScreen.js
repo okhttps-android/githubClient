@@ -53,7 +53,7 @@ class HomeScreen extends React.Component {
                 }}/>
 
                 <TouchableHighlight
-                    underlayColor="#3391FF"
+                    underlayColor="#FF00FF"
                     activeOpacity={1}
                     style={styles.button} onPress={this.loadData.bind(this)}>
                     <Text style={styles.text} > Touch Here </Text>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontWeight:'600',
-        color:'#ffffff'
+        color:'#FFFFFF'
     }
 })
 
