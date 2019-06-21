@@ -5,6 +5,12 @@ import React from "react";
 import { View, Button,Text } from "react-native";
 
 export class DetailsScreen extends React.Component {
+    static navigationOptions = {
+        title: 'DetailsScreen',
+        headerBackTitle:'返回',//设置返回此页面的返回按钮文案，有长度限制
+    }
+
+
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
